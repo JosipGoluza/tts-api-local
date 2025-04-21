@@ -74,8 +74,16 @@ The design emphasizes extensibility, aiming to allow the addition of new TTS mod
     "message": "[file_hash]"
   }
   ```
-
-
+  
+### GET /stream/{hash_id}
+- **Description**: Streams the generated audio file for playback or download
+- **Path Parameters**:
+  - `hash_id`: The file identifier returned from the synthesize endpoint
+- **Response**: Audio file stream (WAV format)
+- **Content-Type**: audio/wav
+- **Error Responses**:
+  - `404`: Audio file not found
+  - `500`: Server error
 
 ## Configuration
 
@@ -86,6 +94,9 @@ Currently supported TTS models:
   - Device: Automatically uses CUDA if available, falls back to CPU
   - Output format: WAV files
   - Output location: `./output` directory (configurable)
+
+### CORS Configuration
+The API implements CORS (Cross-Origin Resource Sharing) - a security feature that controls which web applications can access the API. By default, requests from `http://localhost` and `http://localhost:3000` are allowed. Additional origins can be added to the `origins` list in the application configuration.
 
 
 ## Extensibility
