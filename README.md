@@ -17,14 +17,9 @@ The design emphasizes extensibility, aiming to allow the addition of new TTS mod
 
 ## Technology Stack
 
-*   **Backend:** Python 3.13
+*   **Backend:** Python 3.12
 *   **API Framework:** FastAPI
-*   **Initial TTS Model:** Coqui TTS
 *   *(Other dependencies will be listed in `requirements.txt`)*
-
-## Getting Started
-
-*(Instructions will be added here as the project develops)*
 
 ## Getting Started
 
@@ -51,11 +46,35 @@ The design emphasizes extensibility, aiming to allow the addition of new TTS mod
 
 ## Usage
 
-*(API endpoint details will be added here)*
+### POST /synthesize
+- **Description**: Synthesizes speech from input text
+- **Response**: JSON object containing the generated audio file identifier
+- **Example Response**:
+  ```json
+  {
+    "message": "[file_hash]"
+  }
+  ```
+
+
+## Configuration
+
+### TTS Models
+Currently supported TTS models:
+- **Coqui TTS**
+  - Default model: `tts_models/hr/vits`
+  - Device: Automatically uses CUDA if available, falls back to CPU
+  - Output format: WAV files
+  - Output location: `./output` directory (configurable)
+
 
 ## Extensibility
 
-*(Details on adding new TTS models will be added here)*
+To add support for a new TTS model:
+1. Create a new model class in `app/tts_interface/models/`
+2. Implement the `TTSInterface` abstract class
+3. Add the model to `TTSClient._available_strategies`
+
 
 ## License
 
