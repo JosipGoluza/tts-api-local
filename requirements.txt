@@ -1,3 +1,4 @@
 fastapi[standard]~=0.115.12
 coqui-tts
 torch~=2.6.0
+pydantic~=2.11.3

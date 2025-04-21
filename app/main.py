@@ -12,12 +12,11 @@ async def read_root():
     return {"message": "Welcome to the Local TTS API. Use /docs for API documentation."}
 
 @app.post("/synthesize")
-async def synthesize_speech():
-    my_text = "Bok svijete. Ovo je probni tekst za testiranje ljepote i točnosti modela."
+async def synthesize_speech(request: SynthesisRequest):
     try:
         tts_coqui = TTSClient(model_name="coqui_tts")
         coqui_audio = tts_coqui.generate_speech(
-            text=my_text,
+            text=request.text,
             output_dir=AUDIO_OUTPUT_DIR,
         )
         return {"message": coqui_audio}
