@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+
+from app.tts_interface.tts_client import TTSClient
 
 app = FastAPI()
 
@@ -8,5 +10,14 @@ async def read_root():
 
 @app.post("/synthesize")
 async def synthesize_speech():
-    # TODO: Implement TTS synthesis logic
-    raise HTTPException(status_code=501, detail="Not Implemented Yet")
+    my_text = "Bok svijete. Ovo je probni tekst za testiranje ljepote i točnosti modela."
+    try:
+        tts_coqui = TTSClient(model_name="coqui_tts")
+        coqui_audio = tts_coqui.generate_speech(
+            text=my_text,
+        )
+        print(f"Successfully generated Coqui audio: {coqui_audio}")
+        return {"message": coqui_audio}
+    except Exception as e:
+        print(f"\nAn error occurred during Coqui TTS generation: {e}")
+        return None

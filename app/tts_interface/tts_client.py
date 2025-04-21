@@ -4,7 +4,7 @@ from app.tts_interface.tts_interface import TTSInterface
 
 class TTSClient:
     _available_strategies = {
-        "coqui_xtts": CoquiTTS,
+        "coqui_tts": CoquiTTS,
     }
 
     def __init__(self, model_name: str):
@@ -18,6 +18,6 @@ class TTSClient:
         strategy_class = self._available_strategies[model_name]
         self._strategy: TTSInterface = strategy_class()
 
-    def generate_speech(self, text: str, output_dir: str = "/output/") -> str:
+    def generate_speech(self, text: str, output_dir: str = "./output") -> str:
         audio_file_id = self._strategy.synthesize(text, output_dir)
         return audio_file_id
