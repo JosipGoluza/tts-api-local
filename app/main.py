@@ -16,7 +16,6 @@ async def synthesize_speech():
         coqui_audio = tts_coqui.generate_speech(
             text=my_text,
         )
-        print(f"Successfully generated Coqui audio: {coqui_audio}")
         return {"message": coqui_audio}
     except Exception as e:
         print(f"\nAn error occurred during Coqui TTS generation: {e}")

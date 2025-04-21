@@ -14,7 +14,6 @@ class TTSClient:
                 f"Available models: {list(self._available_models.keys())}"
             )
 
-        print(f"\nSelected TTS Model: {model_name}")
         model_class = self._available_models[model_name]
         self._model: TTSInterface = model_class()
 
