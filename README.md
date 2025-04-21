@@ -46,8 +46,27 @@ The design emphasizes extensibility, aiming to allow the addition of new TTS mod
 
 ## Usage
 
-### POST /synthesize
-- **Description**: Synthesizes speech from input text
+### GET /models
+- **Description**: Returns a list of available TTS models
+- **Response**: JSON object containing array of available model names
+- **Example Response**:
+  ```json
+  {
+    "models": ["coqui_tts"]
+  }
+  ```
+
+
+### POST /synthesize/{model_name}
+- **Description**: Synthesizes speech from an input text using the specified model
+- **Path Parameters**: 
+  - `model_name`: Name of the TTS model to use (e.g., "coqui_tts")
+- **Request Body**: JSON object containing:
+  ```json
+  {
+    "text": "Text to be synthesized into speech"
+  }
+  ```
 - **Response**: JSON object containing the generated audio file identifier
 - **Example Response**:
   ```json
@@ -55,6 +74,7 @@ The design emphasizes extensibility, aiming to allow the addition of new TTS mod
     "message": "[file_hash]"
   }
   ```
+
 
 
 ## Configuration

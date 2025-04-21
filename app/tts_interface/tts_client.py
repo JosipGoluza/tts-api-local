@@ -22,3 +22,7 @@ class TTSClient:
     def generate_speech(self, text: str, output_dir: Path) -> str:
         audio_file_id = self._model.synthesize(text, output_dir)
         return audio_file_id
+
+    @classmethod
+    def get_available_models(cls) -> list[str]:
+        return list(cls._available_models.keys())
