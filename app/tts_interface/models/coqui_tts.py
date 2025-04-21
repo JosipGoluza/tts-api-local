@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 import torch
 from TTS.api import TTS
 
@@ -11,12 +13,10 @@ class CoquiTTS(TTSInterface):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tts_model = TTS(coqui_model_name).to(self.device)
 
-    def synthesize(self, text: str, output_dir: str) -> str:
+    def synthesize(self, text: str, output_dir: Path) -> str:
         file_hash = abs(hash(text))
         output_filename = f"{file_hash}.wav"
         output_path = os.path.join(output_dir, output_filename)
-
-        os.makedirs(output_dir, exist_ok=True)
 
         self.tts_model.tts_to_file(
             text=text,

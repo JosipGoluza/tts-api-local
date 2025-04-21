@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from pathlib import Path
 
 from app.tts_interface.tts_client import TTSClient
 
+AUDIO_OUTPUT_DIR = Path("./output")
+AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 app = FastAPI()
 
 @app.get("/")
@@ -15,6 +18,7 @@ async def synthesize_speech():
         tts_coqui = TTSClient(model_name="coqui_tts")
         coqui_audio = tts_coqui.generate_speech(
             text=my_text,
+            output_dir=AUDIO_OUTPUT_DIR,
         )
         return {"message": coqui_audio}
     except Exception as e:

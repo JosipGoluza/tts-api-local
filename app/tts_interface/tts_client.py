@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from app.tts_interface.models.coqui_tts import CoquiTTS
 from app.tts_interface.tts_interface import TTSInterface
 
@@ -17,6 +19,6 @@ class TTSClient:
         model_class = self._available_models[model_name]
         self._model: TTSInterface = model_class()
 
-    def generate_speech(self, text: str, output_dir: str = "./output") -> str:
+    def generate_speech(self, text: str, output_dir: Path) -> str:
         audio_file_id = self._model.synthesize(text, output_dir)
         return audio_file_id
