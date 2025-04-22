@@ -109,4 +109,4 @@ To add support for a new TTS model:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is intended for testing purposes only. Any commercial use of this project or its outputs is strictly prohibited.
