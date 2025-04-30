@@ -1,6 +1,5 @@
 # Local TTS API
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) <!-- Optional license badge -->
 [![Python: 3.12](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/downloads/release/python-3120/)
 
 A flexible, locally deployable Text-to-Speech (TTS) API server built with Python and FastAPI. This project allows easy testing and integration of various TTS models through a single, consistent API endpoint.
