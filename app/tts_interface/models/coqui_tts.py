@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from random import random
 
 import torch
 from TTS.api import TTS
@@ -15,7 +16,7 @@ class CoquiTTS(TTSInterface):
         self.tts_model = TTS(coqui_model_name).to(self.device)
 
     def synthesize(self, text: str, output_dir: Path) -> str:
-        file_hash = abs(hash(text))
+        file_hash = abs(hash(text + str(random())))
         output_filename = f"{file_hash}.wav"
         output_path = os.path.join(output_dir, output_filename)
 
