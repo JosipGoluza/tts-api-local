@@ -5,5 +5,5 @@ from pathlib import Path
 class TTSInterface(ABC):
 
     @abstractmethod
-    def synthesize(self, text: str, output_dir: Path) -> str:
+    def synthesize(self, text: str, output_dir: Path, voices_dir: Path) -> str:
         pass

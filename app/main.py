@@ -9,6 +9,8 @@ from app.tts_interface.tts_client import TTSClient
 
 AUDIO_OUTPUT_DIR = Path("./output")
 AUDIO_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+VOICES_DIR = Path("./voices")
+VOICES_DIR.mkdir(parents=True, exist_ok=True)
 app = FastAPI()
 
 origins = [
@@ -39,6 +41,7 @@ async def synthesize_speech(model_name: str, request: SynthesisRequest):
         coqui_audio = tts_coqui.generate_speech(
             text=request.text,
             output_dir=AUDIO_OUTPUT_DIR,
+            voices_dir=VOICES_DIR,
         )
         return {"audio_id": coqui_audio}
     except ValueError as ve:
@@ -58,8 +61,8 @@ async def stream_audio(audio_id: str):
 
         return FileResponse(
             path=file_path,
-            media_type='audio/wav',  # Explicitly set the MIME type
-            filename=f"{audio_id}.wav"  # Suggest a filename for download
+            media_type='audio/wav',
+            filename=f"{audio_id}.wav"
         )
 
     except HTTPException as http_exc:

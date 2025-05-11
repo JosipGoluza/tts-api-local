@@ -15,7 +15,7 @@ class CoquiTTS(TTSInterface):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.tts_model = TTS(coqui_model_name).to(self.device)
 
-    def synthesize(self, text: str, output_dir: Path) -> str:
+    def synthesize(self, text: str, output_dir: Path, voices_dir: Path) -> str:
         file_hash = abs(hash(text + str(random())))
         output_filename = f"{file_hash}.wav"
         output_path = os.path.join(output_dir, output_filename)

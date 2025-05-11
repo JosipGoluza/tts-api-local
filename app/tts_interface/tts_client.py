@@ -1,14 +1,16 @@
 from pathlib import Path
 
 from app.tts_interface.models.coqui_tts import CoquiTTS
+from app.tts_interface.models.piper_tts import PiperTTS
 from app.tts_interface.tts_interface import TTSInterface
 
 
 class TTSClient:
     _available_models = {
-        "coqui_tts": CoquiTTS("tts_models/hr/cv/vits"),
-        "coqui_xtts_v2": CoquiTTS("tts_models/multilingual/multi-dataset/xtts_v2"),
-        "coqui_bark": CoquiTTS("tts_models/multilingual/multi-dataset/bark"),
+        "coqui_tts": lambda:CoquiTTS("tts_models/hr/cv/vits"),
+        "coqui_xtts_v2": lambda: CoquiTTS("tts_models/multilingual/multi-dataset/xtts_v2"),
+        "coqui_bark": lambda: CoquiTTS("tts_models/multilingual/multi-dataset/bark"),
+        "piper": lambda: PiperTTS("sr_RS-serbski_institut-medium"),
     }
 
     def __init__(self, model_name: str):
@@ -18,10 +20,10 @@ class TTSClient:
                 f"Available models: {list(self._available_models.keys())}"
             )
 
-        self._model: TTSInterface = self._available_models[model_name]
+        self._model: TTSInterface = self._available_models[model_name]()
 
-    def generate_speech(self, text: str, output_dir: Path) -> str:
-        audio_file_id = self._model.synthesize(text, output_dir)
+    def generate_speech(self, text: str, output_dir: Path, voices_dir: Path) -> str:
+        audio_file_id = self._model.synthesize(text, output_dir, voices_dir)
         return audio_file_id
 
     @classmethod
