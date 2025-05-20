@@ -25,7 +25,7 @@ class CoquiTTS(TTSInterface):
                 text=text,
                 file_path=output_filename,
                 speaker="Tanja Adelina",
-                language="en",
+                language="cs",
             )
         else:
             self.tts_model.tts_to_file(

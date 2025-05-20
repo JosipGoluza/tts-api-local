@@ -9,7 +9,7 @@ class TTSClient:
     _available_models = {
         "coqui_tts": lambda:CoquiTTS("tts_models/hr/cv/vits"),
         "coqui_xtts_v2": lambda: CoquiTTS("tts_models/multilingual/multi-dataset/xtts_v2"),
-        "coqui_bark": lambda: CoquiTTS("tts_models/multilingual/multi-dataset/bark"),
+        #"coqui_bark": lambda: CoquiTTS("tts_models/multilingual/multi-dataset/bark"),
         "piper": lambda: PiperTTS("sr_RS-serbski_institut-medium"),
     }
 
